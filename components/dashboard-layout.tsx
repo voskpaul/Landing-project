@@ -1,14 +1,14 @@
-import Navbar from "@/components/navbar"
 import { SparklesCore } from "@/components/sparkles"
-import type { ReactNode } from "react"
+import DashboardNavbar from "@/components/dashboard-navbar"
+import type React from "react"
 
-interface PageLayoutProps {
-  children: ReactNode
+interface DashboardLayoutProps {
+  children: React.ReactNode
 }
 
-export default function PageLayout({ children }: PageLayoutProps) {
+export default function DashboardLayout({ children }: DashboardLayoutProps) {
   return (
-    <main className="min-h-screen bg-white dark:bg-black/[0.96] antialiased bg-grid-white/[0.02] relative overflow-hidden">
+    <div className="min-h-screen bg-white dark:bg-black/[0.96] antialiased bg-grid-white/[0.02] relative">
       {/* Ambient background with moving particles */}
       <div className="h-full w-full absolute inset-0 z-0">
         <SparklesCore
@@ -23,9 +23,9 @@ export default function PageLayout({ children }: PageLayoutProps) {
       </div>
 
       <div className="relative z-10">
-        <Navbar />
-        {children}
+        <DashboardNavbar />
+        <main className="container mx-auto px-6 py-8">{children}</main>
       </div>
-    </main>
+    </div>
   )
 }

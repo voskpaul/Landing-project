@@ -1,15 +1,15 @@
 "use client"
 
-import { Button } from "@/components/ui/button"
-import { Bot, Menu } from "lucide-react"
-import { motion } from "framer-motion"
-import Link from "next/link"
 import type React from "react"
+
+import Link from "next/link"
+import { Bot, Menu } from "lucide-react"
+import { Button } from "@/components/ui/button"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { useState } from "react"
 import MobileMenu from "@/components/mobile-menu"
 
-export default function Navbar() {
+export default function DashboardNavbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
   const openMobileMenu = () => setIsMobileMenuOpen(true)
@@ -17,47 +17,33 @@ export default function Navbar() {
 
   return (
     <>
-      <motion.nav
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        className="flex items-center justify-between px-6 py-4 backdrop-blur-sm border-b border-white/10 dark:border-white/10 border-black/10"
-      >
-        <Link href="/" className="flex items-center space-x-2">
+      <nav className="flex items-center justify-between px-6 py-4 backdrop-blur-sm border-b border-border">
+        <Link href="/dashboard" className="flex items-center space-x-2">
           <Bot className="w-8 h-8 text-purple-500" />
           <span className="text-foreground font-medium text-xl">ResearchAI</span>
         </Link>
 
         <div className="hidden md:flex items-center space-x-8">
-          <NavLink href="/features">Features</NavLink>
-          <NavLink href="/how-it-works">How it Works</NavLink>
-          <NavLink href="/examples">Examples</NavLink>
-          <NavLink href="/pricing">Pricing</NavLink>
+          <NavLink href="/dashboard">Dashboard</NavLink>
+          <NavLink href="/upload">Upload</NavLink>
+          <NavLink href="/dashboard/papers">My Papers</NavLink>
           <NavLink href="/compare">Compare Papers</NavLink>
+          <NavLink href="/dashboard/settings">Settings</NavLink>
         </div>
 
-        <div className="hidden md:flex items-center space-x-4">
-          <ThemeToggle />
-          <Button variant="ghost" className="text-foreground hover:text-purple-400" asChild>
-            <Link href="/auth/login">Sign In</Link>
-          </Button>
-          <Button className="bg-purple-600 hover:bg-purple-700 text-white" asChild>
-            <Link href="/auth/register">Get Started</Link>
-          </Button>
-        </div>
-
-        <div className="flex items-center space-x-2 md:hidden">
+        <div className="flex items-center space-x-4">
           <ThemeToggle />
           <Button
             variant="ghost"
             size="icon"
-            className="text-foreground"
+            className="md:hidden text-foreground"
             onClick={openMobileMenu}
             aria-label="Open menu"
           >
             <Menu className="w-6 h-6" />
           </Button>
         </div>
-      </motion.nav>
+      </nav>
 
       <MobileMenu isOpen={isMobileMenuOpen} onClose={closeMobileMenu} />
     </>
